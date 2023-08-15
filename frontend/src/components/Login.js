@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { redirect } from "react-router-dom";
 import axios from "axios";
+import "../styles/loginForm.css";
 
 const Login = () => {
   const [fullName, setFullname] = useState("");
@@ -37,8 +38,8 @@ const Login = () => {
     axios(configuration)
       .then((result) => {
         setLogin(true);
-        redirect("/");
         alert("logged in successfully");
+        return redirect("/");
       })
       .catch((error) => {
         error = new Error();
@@ -46,41 +47,42 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h2>Login</h2>
-      <Form onSubmit={(e) => handleSubmit(e)}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Enter email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
+    <div className="login-page">
+      <div className="login-form">
+        <Form onSubmit={(e) => handleSubmit(e)}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
 
-        {/* password */}
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        {/* submit button */}
-        <Button
-          varient="primary"
-          type="submit"
-          onClick={(e) => handleSubmit(e)}
-        >
-          Login
-        </Button>
-      </Form>
-    </>
+          {/* password */}
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          {/* submit button */}
+          <Button
+            varient="primary"
+            type="submit"
+            onClick={(e) => handleSubmit(e)}
+          >
+            Login
+          </Button>
+        </Form>
+      </div>
+    </div>
   );
 };
 

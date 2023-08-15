@@ -7,7 +7,13 @@ import styled from "styled-components";
 const Profile = () => {
   const [data, setData] = useState([]);
   const [fullName, setFullname] = useState("");
+  const [gender, setGender] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [dob, setDob] = useState("");
+  const [registeredDate, setRegisteredDate] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,10 +44,10 @@ const Profile = () => {
     borderRadius: "50%",
   };
 
-  const birthday = data.dob.split("T");
-  const seperatedDate = birthday[0].split("-");
-  // const birthday = seperatedDate[1] + seperatedDate[2];
-  // console.log(birthday);
+
+
+  // const newdob = new Date(data.dob);
+  // const monthPortion = newdob.toISOString().split("T")[1];
 
   return (
     <>
@@ -56,18 +62,19 @@ const Profile = () => {
           <ProfileName>{data.fullName}</ProfileName>
         </User>
         <Details>
-          <Detail>Gender: Male</Detail>
+          <Detail>Gender: {data.gender}</Detail>
           <Detail>Birthday: {}</Detail>
-          <Detail>Phone: Male</Detail>
-          <Detail>Address: Male</Detail>
-          <Detail>City: Male</Detail>
-          <Detail>Zip code: Male</Detail>
-          <Detail>Registered date: Male</Detail>
+          <Detail>Phone: {data.phoneNumber}</Detail>
+          <Detail>Address: {data.streetAddress}</Detail>
+          <Detail>City: {data.city}</Detail>
+          <Detail>Zip code: {data.zipCode}</Detail>
+          <Detail>Registered date: {data.registeredDate}</Detail>
         </Details>
         <Notes>
           <label htmlFor="notes">Notes:</label>
           <Note id="notes" cols="30" rows="4" className="notes-textarea"></Note>
         </Notes>
+        <Delete />
       </Dashboard>
     </>
   );

@@ -1,0 +1,35 @@
+/* RegistrationForm.css */
+
+.registration-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+}
+
+.registration-form-container form {
+  margin-top: 10px;
+}
+
+.registration-form-container form label {
+  font-weight: bold;
+}
+
+.registration-form-container form .form-group {
+  margin-bottom: 15px;
+}
+
+.registration-form-container form .form-control {
+  border-radius: 5px;
+}
+
+.registration-form-container form select.form-control {
+  appearance: none;
+  padding: 8px;
+}
+
+.registration-form-container form .btn-primary {
+  width: 100%;
+}

@@ -21,6 +21,11 @@ const register = asyncHandler(async (request, response) => {
       const user = new User({
         fullName: request.body.fullName,
         dob: request.body.dob,
+        gender: request.body.gender,
+        phoneNumber: request.body.phoneNumber,
+        streetAddress: request.body.streetAddress,
+        city: request.body.city,
+        zipCode: request.body.zipCode,
         email: request.body.email,
         password: hashedPassword,
       });

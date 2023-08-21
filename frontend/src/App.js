@@ -7,6 +7,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
+import UpdateForm from "./components/UpdateForm";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user/:id" element={<Profile />} />
+        <Route path="/user/:id/edit" element={<UpdateForm />} />
       </Routes>
     </div>
   );

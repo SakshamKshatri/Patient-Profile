@@ -6,9 +6,9 @@ import cors from "cors";
 const app = express();
 
 import dbConnect from "../server/db/dbConnect.js";
-import User from "../server/db/userModel.js";
 
 import userRoutes from "./routes/userRoutes.js";
+import loginRoute from "./routes/loginRoute.js";
 
 dbConnect();
 
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use("/", userRoutes);
 app.use("/user/:id", userRoutes);
 app.use("/register", userRoutes);
-app.use("/login", userRoutes);
+app.use("/login", loginRoute);
 
 app.get("/free-endpoint", (req, res) => {
   response.json({ message: "you are free to access this endpoint" });

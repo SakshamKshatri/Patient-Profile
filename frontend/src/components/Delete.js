@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Delete = () => {
   const { id } = useParams();
-  const url = `${id}`;
+  const url = `http://localhost:8000/user/${id}`;
   const deleteHandler = async () => {
     try {
       await axios.delete(url);
@@ -16,7 +16,7 @@ const Delete = () => {
   };
 
   return (
-    <Button varient="primary" onClick={deleteHandler}>
+    <Button variant="danger" onClick={deleteHandler}>
       Delete this user
     </Button>
   );

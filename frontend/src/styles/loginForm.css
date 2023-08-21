@@ -1,16 +1,59 @@
 .login-page {
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background-color: #000814;
 }
 
 .login-form {
-  background-color: rgba(255, 255, 255, 0.9);
+  flex: 1;
+  background-color: #000814;
+  color: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   width: 300px;
+  max-width: 80%;
+  margin-right: 20px;
+}
+
+.background-image {
+  flex: 1;
+  background-image: url("https://images.unsplash.com/photo-1557264322-b44d383a2906?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGRhcmslMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+
+.login-form input[type="email"]::placeholder,
+.login-form input[type="password"]::placeholder {
+  color: #000814;
+}
+
+@media (min-width: 768px) {
+  .login-page {
+    flex-direction: row;
+  }
+
+  .login-form {
+    max-width: 50%;
+    margin-right: 40px;
+  }
+
+  .login-image {
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .login-page {
+    flex-direction: column;
+  }
+
+  .login-form,
+  .login-image {
+    max-width: 100%;
+    margin: 10px;
+  }
 }

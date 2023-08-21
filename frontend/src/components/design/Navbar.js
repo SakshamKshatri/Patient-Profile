@@ -1,17 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import { useParams, Link } from "react-router-dom";
+import LogoutButton from "../LogoutButton.js";
 
 const Navbar = () => {
   const headerStyles = {
-    height: "35px",
-    backgroundColor: "#333",
+    height: "50px",
+    backgroundColor: "#4a4e69",
     color: "white",
-    padding: "10px;",
+    padding: "10px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
   };
 
   const linkStyles = {
     textDecoration: "none",
     color: "white",
+    fontSize: "25px",
+  };
+
+  const buttonStyles = {
+    background: "none",
+    color: "inherit",
+    border: "none",
+    padding: 0,
+    font: "inherit",
+    cursor: "pointer",
+    outline: "inherit",
   };
 
   return (
@@ -22,21 +38,7 @@ const Navbar = () => {
             Promed
           </a>
         </NavbarItem>
-        <NavbarItem>
-          <a href="/" style={linkStyles}>
-            Profile
-          </a>
-        </NavbarItem>
-        <NavbarItem>
-          <a href="/" style={linkStyles}>
-            About
-          </a>
-        </NavbarItem>
-        <NavbarItem>
-          <a href="/" style={linkStyles}>
-            Contact
-          </a>
-        </NavbarItem>
+        <LogoutButton style={buttonStyles} />
       </NavbarItems>
     </header>
   );

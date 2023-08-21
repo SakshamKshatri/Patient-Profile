@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Dropdown } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { redirect } from "react-router-dom";
 import "../styles/registrationForm.css";
 
 const Register = () => {
@@ -13,6 +12,8 @@ const Register = () => {
   const [streetAddress, setStreetAddress] = useState("");
   const [city, setCity] = useState("");
   const [zipCode, setZipCode] = useState("");
+  // const [fileData, setFileData] = useState("");
+  const [profilePicture, setFile] = useState("");
   const [password, setPassword] = useState("");
   const [register, setRegister] = useState(false);
   const url = "http://localhost:8000/register";
@@ -27,28 +28,30 @@ const Register = () => {
   }, []);
 
   const handleSubmit = (e) => {
-    // prevent the form from refreshing the whole page
+    
     e.preventDefault();
-    // make a popup alert showing the "submitted" text
+
+    const formdata = new FormData();
+
+    formdata.append("profilePicture", profilePicture);
+    formdata.append("fullName", fullName);
+    formdata.append("dob", dob);
+    formdata.append("gender", gender);
+    formdata.append("streetAddress", streetAddress);
+    formdata.append("city", city);
+    formdata.append("phoneNumber", phoneNumber);
+    formdata.append("zipCode", zipCode);
+    formdata.append("email", email);
+    formdata.append("password", password);
+
     const configuration = {
       method: "post",
       url: url,
-      data: {
-        fullName,
-        dob,
-        gender,
-        phoneNumber,
-        streetAddress,
-        city,
-        zipCode,
-        email,
-        password,
-      },
+      data: formdata,
     };
     axios(configuration)
       .then((result) => {
         setRegister(true);
-        redirect("/");
         alert("registered successfully");
       })
       .catch((error) => {
@@ -60,7 +63,7 @@ const Register = () => {
     <>
       <h2>Register</h2>
       <div className="registration-form-container">
-        <Form onSubmit={(e) => handleSubmit(e)}>
+        <Form onSubmit={(e) => handleSubmit(e)} encType="multipart/form-data">
           <Form.Group controlId="fullName">
             <Form.Label>Full name</Form.Label>
             <Form.Control
@@ -88,6 +91,7 @@ const Register = () => {
             id="gender"
             onChange={(e) => setGender(e.target.value)}
           >
+            <option value="--">Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">other</option>
@@ -95,6 +99,7 @@ const Register = () => {
 
           <Form.Group controlId="phoneNumber">
             <Form.Label>Enter your phone number:</Form.Label>
+
             <Form.Control
               type="text"
               name="phoneNumber"
@@ -133,12 +138,24 @@ const Register = () => {
               name="zipCode"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              placeholder="Enter your full gender"
+              placeholder="city's zip code"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="profilePicture">
+            <Form.Label>Insert your profile picture</Form.Label>
+            <Form.Control
+              type="file"
+              name="profilePicture"
+              // value={profilePicture}
+              onChange={(e) => setFile(e.target.files[0])}
+              placeholder="upload profile picture"
             />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
+            
             <Form.Control
               type="email"
               name="email"

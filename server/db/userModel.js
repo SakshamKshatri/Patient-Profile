@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 
-const timeElapsed = Date.now();
-const registered = new Date(timeElapsed);
-const today = registered.toDateString();
+const Schema = mongoose.Schema;
 
+// const ImageSchema = new Schema({
+//   url: String,
+//   filename: String,
+// });
 
 const UserSchema = new mongoose.Schema({
   fullName: {
@@ -30,9 +32,13 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please enter your zip code"],
   },
+  profilePicture: {
+    url: String,
+    filename: String,
+  },
   registeredDate: {
     type: Number,
-    default: today
+    default: Date.now(),
   },
   phoneNumber: {
     type: Number,
@@ -43,12 +49,13 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please provide an Email!"],
     unique: [true, "Email Exist"],
   },
-  
+
   password: {
     type: String,
     required: [true, "Please provide a password!"],
     unique: false,
   },
+  role: String,
 });
 
-export default mongoose.model.Users || mongoose.model("Users", UserSchema);
+export default mongoose.model("Users", UserSchema);

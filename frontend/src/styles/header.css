@@ -1,0 +1,17 @@
+header {
+  display: inline;
+  margin: 10px 0;
+}
+
+h4 {
+  display: inline;
+  margin: 10px;
+  text-align: center;
+  color: #8d99ae;
+  font-weight: 300;
+}
+
+h4 p {
+  display: inline;
+  font-weight: 200;
+}

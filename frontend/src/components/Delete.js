@@ -17,7 +17,7 @@ const Delete = () => {
 
   return (
     <Button variant="danger" onClick={deleteHandler}>
-      Delete this user
+      Delete
     </Button>
   );
 };

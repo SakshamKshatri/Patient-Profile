@@ -4,11 +4,14 @@ import { redirect } from "react-router-dom";
 import axios from "axios";
 import "../styles/loginForm.css";
 import { useAuth } from "../Authcontext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [login, setLogin] = useState(false);
+
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
 
@@ -26,6 +29,7 @@ const Login = () => {
       if (response.data.token) {
         login(response.data.token); // Call the login function with the token
         alert("Logged in successfully");
+        navigate("/");
       } else {
         alert("Login failed");
       }
@@ -33,6 +37,10 @@ const Login = () => {
       console.log(error);
       alert("An error occurred during login");
     }
+  };
+
+  const buttonStyles = {
+    marginTop: "10px",
   };
 
   return (
@@ -68,6 +76,7 @@ const Login = () => {
             varient="primary"
             type="submit"
             onClick={(e) => handleSubmit(e)}
+            style={buttonStyles}
           >
             Login
           </Button>

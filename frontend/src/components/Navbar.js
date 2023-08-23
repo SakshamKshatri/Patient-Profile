@@ -1,18 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { useParams, Link } from "react-router-dom";
-import LogoutButton from "../LogoutButton.js";
+import { useAuth } from "../Authcontext.js";
+import LogoutButton from "./LogoutButton.js";
+import LoginButton from "./LoginButton.js";
+import RegisterButton from "./RegisterButton.js";
+import "../styles/navbar.css";
 
 const Navbar = () => {
-  const headerStyles = {
-    height: "50px",
-    backgroundColor: "#4a4e69",
-    color: "white",
-    padding: "10px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  };
+  const { authenticated } = useAuth();
 
   const linkStyles = {
     textDecoration: "none",
@@ -31,14 +26,25 @@ const Navbar = () => {
   };
 
   return (
-    <header style={headerStyles}>
+    <header className="headerStyles" id="navbar">
       <NavbarItems>
         <NavbarItem>
           <a href="/" style={linkStyles}>
             Promed
           </a>
         </NavbarItem>
-        <LogoutButton style={buttonStyles} />
+
+        <NavbarItem>
+          {authenticated && <LogoutButton style={buttonStyles} />}
+        </NavbarItem>
+
+        <NavbarItem>
+          {!authenticated && <LoginButton style={buttonStyles} />}
+        </NavbarItem>
+
+        <NavbarItem>
+          {!authenticated && <RegisterButton style={buttonStyles} />}
+        </NavbarItem>
       </NavbarItems>
     </header>
   );
@@ -53,6 +59,9 @@ const NavbarItems = styled.ul`
 
 const NavbarItem = styled.li`
   margin-right: 20px;
+  &:hover {
+    color: #e0e0e0;
+  }
 `;
 
 export default Navbar;

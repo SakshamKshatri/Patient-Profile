@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import Delete from "./Delete.js";
-import Navbar from "./design/Navbar.js";
+import Navbar from "./Navbar.js";
 import { useAuth } from "../Authcontext.js";
 import UpdateButton from "./UpdateButton.js";
+import Header from "./Header.js";
 
 const Profile = () => {
   const [data, setData] = useState([]);
@@ -63,14 +64,19 @@ const Profile = () => {
     objectFit: "cover",
   };
 
+  const detailStyle = {
+    fontWeight: 200,
+    margin: "2px 0",
+  };
+
   const dob_format = new Date(data.dob);
 
   return (
     <>
       <Navbar />
+      <Header />
       <Dashboard>
         <User>
-          {console.log("ProfilePicture url: " + profilePicture)}
           <img
             src={profilePicture.url}
             alt="profile"
@@ -78,18 +84,40 @@ const Profile = () => {
             className="profilePicture"
           />
           <ProfileName>{data.fullName}</ProfileName>
+          <Email>{data.email}</Email>
         </User>
         <Details>
-          <Detail>Gender: {data.gender}</Detail>
           <Detail>
-            Birthday: {dob_format.getMonth() + 1 + "-" + dob_format.getDate()}
+            <p style={detailStyle}>Gender: </p>
+            {data.gender}
           </Detail>
-          <Detail>Phone: {data.phoneNumber}</Detail>
-          <Detail>Address: {data.streetAddress}</Detail>
-          <Detail>City: {data.city}</Detail>
-          <Detail>Zip code: {data.zipCode}</Detail>
-          <Detail>Registered date: {data.registeredDate}</Detail>
+
+          <Detail>
+            <p style={detailStyle}>Birthday: </p>
+            {dob_format.getMonth() + 1 + "-" + dob_format.getDate()}
+          </Detail>
+          <Detail>
+            <p style={detailStyle}>Phone number: </p>
+            {data.phoneNumber}
+          </Detail>
+          <Detail>
+            <p style={detailStyle}>Street Address: </p>
+            {data.streetAddress}
+          </Detail>
+          <Detail>
+            <p style={detailStyle}>City: </p>
+            {data.city}
+          </Detail>
+          <Detail>
+            <p style={detailStyle}>Zip code: </p>
+            {data.zipCode}
+          </Detail>
+          <Detail>
+            <p style={detailStyle}>Registered date: </p>
+            {data.registeredDate}
+          </Detail>
         </Details>
+
         <Notes>
           <label htmlFor="notes">Notes:</label>
           <Note id="notes" cols="30" rows="4" className="notes-textarea"></Note>
@@ -116,25 +144,18 @@ const Dashboard = styled.div`
 
   @media (min-width: ${responsiveBreakpoint}) {
     flex-direction: row;
-  }
-`;
-
-const Details = styled.div`
-  flex-grow: 1;
-  margin: 20px;
-  border: 2px solid black;
-  border-radius: 30px;
-  padding: 20px;
-
-  @media (min-width: ${responsiveBreakpoint}) {
-    margin: 0 20px;
-    padding: 30px;
+    justify-content: space-between;
   }
 `;
 
 const User = styled.div`
   text-align: center;
-  margin-bottom: 20px;
+  margin: 5px;
+  border-style: inset;
+  padding: 20px;
+  border-radius: 30px;
+  flex: 1;
+  height: 300px;
 
   @media (min-width: ${responsiveBreakpoint}) {
     margin-bottom: 0;
@@ -146,12 +167,30 @@ const ProfileName = styled.h2`
   font-size: 24px;
 `;
 
+const Email = styled.p`
+  font-weight: 200;
+`;
+
+const Details = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 5px;
+  height: 300px;
+  border-style: outset;
+  border-radius: 30px;
+  padding: 20px;
+`;
+
 const Detail = styled.p`
-  margin: 10px 0;
+  flex: 0 0 calc(33.33% - 20px); /* Each column takes up one-third of the width minus margins */
+  margin: 5px 0;
 `;
 
 const Notes = styled.div`
+  margin: 10px;
   margin-top: 20px;
+  flex: 1; /* Take up one-third of the width */
 `;
 
 const Note = styled.textarea`

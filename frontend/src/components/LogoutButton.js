@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const LogoutButton = ({ style }) => {
   const navigate = useNavigate();
@@ -16,10 +16,21 @@ const LogoutButton = ({ style }) => {
     }
   };
 
+  const linkStyles = {
+    textDecoration: "none",
+    color: "white",
+    fontSize: "25px",
+    paddingRight: "10px",
+  };
+
   return (
-    <button onClick={handleLogout} style={style}>
-      Logout
-    </button>
+    <>
+      <Link style={linkStyles}>
+        <button onClick={handleLogout} style={style}>
+          Logout
+        </button>
+      </Link>
+    </>
   );
 };
 

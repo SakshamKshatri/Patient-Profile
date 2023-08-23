@@ -13,7 +13,7 @@ router.get("/", userController.getUsers);
 
 router
   .route("/user/:id")
-  .delete(auth, checkRole("admin"), userController.deleteUser)
+  .delete(userController.deleteUser)
   .get(userController.getUserById);
 
 router.post(

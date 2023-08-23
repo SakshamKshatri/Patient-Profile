@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./design/Navbar.js";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Resize } from "@cloudinary/url-gen/actions";
+import Navbar from "./Navbar.js";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -28,6 +28,17 @@ const Home = () => {
     color: "#1d3557",
   };
 
+  const numberStyle = {
+    display: "inline",
+    fontWeight: 200,
+    color: "blue",
+  };
+
+  function objectLength(obj_data) {
+    const number = Object.keys(obj_data).length;
+    return number;
+  }
+
   // sorting the data in alphabetical order
   const sortedData = data
     .slice()
@@ -36,6 +47,10 @@ const Home = () => {
   return (
     <>
       <Navbar />
+
+      <PatientNumber>
+        Patients: <p style={numberStyle}>{objectLength(data)}</p>
+      </PatientNumber>
 
       <ColumnTitle>
         <p style={(paraStyles, { color: "#0077b6" })}>Basic info</p>
@@ -53,12 +68,12 @@ const Home = () => {
               <img src={dataObj.profilePicture.url} alt={dataObj.fullName} />
             </ProfilePicture>
 
-            <h5>{dataObj.gender}</h5>
-            <h5>{dataObj.phoneNumber}</h5>
-            <h5>{dataObj.city}</h5>
-            <h5>{dataObj.registeredDate}</h5>
+            <h6>{dataObj.gender}</h6>
+            <h6>{dataObj.phoneNumber}</h6>
+            <h6>{dataObj.city}</h6>
+            <h6>{dataObj.registeredDate}</h6>
 
-            <h4>{dataObj.fullName}</h4>
+            <h5>{dataObj.fullName}</h5>
 
             {/* Assuming there's a registeredDate property */}
           </PatientBlock>
@@ -110,6 +125,12 @@ const ProfilePicture = styled.div`
 
 const FullName = styled.div`
   color: "red";
+`;
+
+const PatientNumber = styled.h5`
+  display: inline;
+  color: #0077b6;
+  margin: 10px;
 `;
 
 export default Home;

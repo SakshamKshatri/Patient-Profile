@@ -71,6 +71,13 @@ const Profile = () => {
 
   const dob_format = new Date(data.dob);
 
+  function getAge() {
+    const dob_year = dob_format.getFullYear();
+    const current_year = new Date().getFullYear();
+    const age = current_year - dob_year;
+    return age;
+  }
+
   return (
     <>
       <Navbar />
@@ -85,6 +92,8 @@ const Profile = () => {
           />
           <ProfileName>{data.fullName}</ProfileName>
           <Email>{data.email}</Email>
+          {" | "}
+          <Age>Age: {getAge()}</Age>
         </User>
         <Details>
           <Detail>
@@ -93,8 +102,12 @@ const Profile = () => {
           </Detail>
 
           <Detail>
-            <p style={detailStyle}>Birthday: </p>
-            {dob_format.getMonth() + 1 + "-" + dob_format.getDate()}
+            <p style={detailStyle}>Date of Birth: </p>
+            {dob_format.getFullYear() +
+              "-" +
+              dob_format.getMonth() +
+              "-" +
+              dob_format.getDay()}
           </Detail>
           <Detail>
             <p style={detailStyle}>Phone number: </p>
@@ -168,6 +181,12 @@ const ProfileName = styled.h2`
 `;
 
 const Email = styled.p`
+  display: inline;
+  font-weight: 200;
+`;
+
+const Age = styled.p`
+  display: inline;
   font-weight: 200;
 `;
 

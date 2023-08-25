@@ -7,6 +7,16 @@ const Schema = mongoose.Schema;
 //   filename: String,
 // });
 
+const milliseconds = Date.now();
+const format = new Date(milliseconds);
+
+const year = format.getYear() + 1900;
+const month = format.getMonth() + 1;
+const date = format.getDate();
+
+const registeredDate = (year + "-" + month + "-" + date);
+console.log(registeredDate);
+
 const UserSchema = new mongoose.Schema({
   fullName: {
     type: String,
@@ -37,8 +47,8 @@ const UserSchema = new mongoose.Schema({
     filename: String,
   },
   registeredDate: {
-    type: Number,
-    default: Date.now(),
+    type: String,
+    default: registeredDate,
   },
   phoneNumber: {
     type: Number,

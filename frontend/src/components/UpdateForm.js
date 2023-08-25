@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const UpdateForm = () => {
@@ -14,6 +14,7 @@ const UpdateForm = () => {
   const [profilePicture, setFile] = useState("");
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -56,6 +57,7 @@ const UpdateForm = () => {
       });
 
       alert("Updated user successfully");
+      navigate(`/user/${id}`)
     } catch (error) {
       console.log("Something went wrong:", error);
     }

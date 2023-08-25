@@ -13,6 +13,7 @@ const Navbar = () => {
     textDecoration: "none",
     color: "white",
     fontSize: "25px",
+    marginBottom: "30px",
   };
 
   const buttonStyles = {

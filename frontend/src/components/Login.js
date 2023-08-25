@@ -28,7 +28,7 @@ const Login = () => {
 
       if (response.data.token) {
         login(response.data.token); // Call the login function with the token
-        alert("Logged in successfully");
+        alert(`Logged in successfully ${response.data.email}`);
         navigate("/");
       } else {
         alert("Login failed");

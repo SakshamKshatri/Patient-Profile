@@ -21,10 +21,19 @@ const register = asyncHandler(async (request, response) => {
       const user = new User({
         fullName: request.body.fullName,
         dob: request.body.dob,
+        gender: request.body.gender,
+        phoneNumber: request.body.phoneNumber,
+        streetAddress: request.body.streetAddress,
+        city: request.body.city,
+        zipCode: request.body.zipCode,
+        profilePicture: {
+          url: request.file.path,
+          filename: request.file.filename,
+        },
         email: request.body.email,
         password: hashedPassword,
       });
-
+      console.log(user);
       user
         .save()
         // return success if the new user is added to the database successfully
@@ -68,7 +77,7 @@ const login = asyncHandler(async (request, response) => {
           // check if password matches
           if (!passwordCheck) {
             return response.status(400).send({
-              message: "Passwords does not match",
+              message: "Email or Password didn't match",
               error,
             });
           }
@@ -78,8 +87,6 @@ const login = asyncHandler(async (request, response) => {
             {
               userId: user._id,
               userEmail: user.email,
-              // fullName: user.fullName,
-              // dob: user.dob,
             },
             "RANDOM-TOKEN",
             { expiresIn: "24h" }
@@ -109,6 +116,49 @@ const login = asyncHandler(async (request, response) => {
     });
 });
 
+const logout = asyncHandler(async (req, res) => {
+  const decodedToken = req.user;
+  res.status(200).json({ message: "Logout successful" });
+});
+
+const updateUser = asyncHandler(async (req, res) => {
+  const { fullName, dob, gender, streetAddress, phoneNumber, city, zipCode } =
+    req.body;
+
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update user properties
+    user.fullName = fullName;
+    user.dob = dob;
+    user.gender = gender;
+    user.streetAddress = streetAddress;
+    user.phoneNumber = phoneNumber;
+    user.city = city;
+    user.zipCode = zipCode;
+
+    // Check if profilePicture is included in the request
+    if (req.file) {
+      user.profilePicture = {
+        url: req.file.path,
+        filename: req.file.filename,
+      };
+    }
+
+    // Save the updated user
+    await user.save();
+
+    // Respond with the updated user data
+    res.status(200).json({ message: "User updated successfully", user });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user", error });
+  }
+});
+
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
@@ -121,4 +171,12 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
-export default { getUsers, getUserById, register, login, deleteUser };
+export default {
+  getUsers,
+  getUserById,
+  register,
+  login,
+  updateUser,
+  deleteUser,
+  logout,
+};

@@ -1,0 +1,11 @@
+.headerStyles {
+  overflow: hidden;
+  height: 50px;
+  background-color: #8d99ae;
+  color: white;
+  margin-top: 0;
+  padding: 10px;
+  display: flex;
+  align-items: "center";
+  justify-content: space-between;
+}

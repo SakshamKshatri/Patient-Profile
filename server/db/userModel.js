@@ -14,7 +14,7 @@ const year = format.getYear() + 1900;
 const month = format.getMonth() + 1;
 const date = format.getDate();
 
-const registeredDate = (year + "-" + month + "-" + date);
+const registeredDate = year + "-" + month + "-" + date;
 console.log(registeredDate);
 
 const UserSchema = new mongoose.Schema({
@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     required: [true, "Please enter your date of birth"],
   },
+
   gender: {
     type: String,
     required: [true, "Please enter your gender"],
@@ -54,6 +55,7 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please enter your phone number"],
   },
+
   email: {
     type: String,
     required: [true, "Please provide an Email!"],

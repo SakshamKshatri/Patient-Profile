@@ -12,7 +12,7 @@ const Delete = () => {
     try {
       await axios.delete(url);
       alert("deleted successfully");
-      navigate('/')
+      navigate("/");
     } catch (error) {
       console.log("Something went wrong ", error);
     }

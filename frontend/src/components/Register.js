@@ -4,8 +4,6 @@ import axios from "axios";
 import "../styles/registrationForm.css";
 import { useNavigate } from "react-router-dom";
 
-import Navbar from "./Navbar.js"
-
 const Register = () => {
   const [fullName, setFullname] = useState("");
   const [email, setEmail] = useState("");
@@ -57,7 +55,7 @@ const Register = () => {
       .then((result) => {
         setRegister(true);
         alert("registered successfully");
-        navigate("/");
+        navigate("/login");
       })
       .catch((error) => {
         error = new Error();
@@ -66,7 +64,6 @@ const Register = () => {
 
   return (
     <>
-    <Navbar />
       <div className="registration-page">
         <h2>Register</h2>
         <div className="registration-form">
@@ -111,7 +108,6 @@ const Register = () => {
 
               <Form.Control
                 type="text"
-                maxLength="12"
                 name="phoneNumber"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -185,16 +181,14 @@ const Register = () => {
                 placeholder="Password"
               />
             </Form.Group>
-{/* 
+
             <Button
               variant="primary"
               type="submit"
-              
               onClick={(e) => handleSubmit(e)}
             >
               Submit
-            </Button> */}
-            <button class="btn btn-primary mt-2" type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
+            </Button>
             {/* {register ? (
               <p className="text-success">You are registered successfully</p>
             ) : (

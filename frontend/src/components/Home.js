@@ -32,13 +32,6 @@ const Home = () => {
     color: "blue",
   };
 
-  const onClickTr = () => {
-    console.log("table row clicked");
-    sortedData.map((val, index) => {
-      return <Link path={`/user/${val._id}`} />;
-    });
-  };
-
   function objectLength(obj_data) {
     const number = Object.keys(obj_data).length;
     return number;
@@ -70,7 +63,7 @@ const Home = () => {
 
         {sortedData.map((dataObj, key) => {
           return (
-            <tr key={key} onClick={onClickTr} className="patient-block">
+            <tr key={key} className="patient-block">
               {/* <Link
                 key={dataObj._id}
                 to={`/user/${dataObj._id}`}
@@ -107,32 +100,6 @@ const Home = () => {
   );
 };
 
-const PatientBlock = styled.section`
-  display: flex; /* Use flexbox for horizontal layout */
-  /* justify-content: space-between;
-  flex-direction: row; */
-  align-items: center; /* Center align items vertically */
-  gap: 10px;
-  border: 1px solid #ccc;
-  margin: 10px;
-  padding: 10px;
-  /* max-width: 100%; */
-  width: 100%;
-  max-height: 300px;
-  background-color: #f7f7f7;
-  transition: background-color 0.3s ease;
-
-  h6 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &:hover {
-    background-color: #e0e0e0;
-  }
-`;
-
 const ProfilePicture = styled.div`
   max-width: 80px;
   max-height: 80px;
@@ -154,60 +121,6 @@ const ProfilePicture = styled.div`
   h6 {
     text-align: center;
     margin: 5px 0;
-  }
-`;
-
-const FullName = styled.h5`
-  color: #023047;
-`;
-
-const Gender = styled.h6`
-  color: #023047;
-`;
-
-const PhoneNumber = styled.h6`
-  color: #023047;
-`;
-
-const City = styled.h6`
-  color: #023047;
-`;
-
-const RegisteredDate = styled.h6`
-  color: #023047;
-`;
-
-const Info = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin: 10px;
-  padding: 10px;
-  max-width: 100%;
-  max-height: 300px;
-
-  h5 {
-    margin-right: 50px;
-  }
-
-  ${FullName} {
-    grid-column: 1 / 2;
-  }
-
-  ${Gender} {
-    grid-column: 2 / 3;
-  }
-
-  ${PhoneNumber} {
-    grid-column: 3 / 4;
-  }
-
-  ${City} {
-    grid-column: 4 / 5;
-  }
-
-  ${RegisteredDate} {
-    grid-column: 5 / 6;
   }
 `;
 

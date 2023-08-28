@@ -1,6 +1,8 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-require("dotenv").config();
+import dotenv from "dotenv";
+
+dotenv.config();
 
 async function dbConnect() {
   mongoose
@@ -9,6 +11,7 @@ async function dbConnect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false,
     })
     .then(() => {
       console.log("Successfully connected to MongoDB Atlas!");
@@ -19,4 +22,4 @@ async function dbConnect() {
     });
 }
 
-module.exports = dbConnect;
+export default dbConnect;

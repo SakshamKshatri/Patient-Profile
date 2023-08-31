@@ -5,6 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/loginForm.css";
 import { useAuth } from "../Authcontext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -18,6 +21,12 @@ const Login = () => {
 
   const { login } = useAuth(); // Use the login function from AuthContext
 
+  const notify = () => toast("Log in successfull");
+
+  const handleNotify = () => {
+    notify();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,7 +38,6 @@ const Login = () => {
 
       if (response.data.token) {
         login(response.data.token); // Call the login function with the token
-        alert(`Logged in successfully ${response.data.email}`);
         navigate("/");
       } else {
         alert("Login failed");
@@ -76,11 +84,15 @@ const Login = () => {
           <Button
             varient="primary"
             type="submit"
-            onClick={(e) => handleSubmit(e)}
+            onClick={(e) => {
+              handleSubmit(e);
+              handleNotify();
+            }}
             style={buttonStyles}
           >
             Login
           </Button>
+          {/* <ToastContainer /> */}
         </Form>
         <div className="create-new-account">
           <Link to="/signup">

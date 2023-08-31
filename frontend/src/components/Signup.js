@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 
 import "../styles/loginForm.css";
 
@@ -25,6 +27,12 @@ const Signup = () => {
     fetchData();
   }, []);
 
+  const notify = () => toast("Signed up successfully");
+
+  const handleNotify = () => {
+    notify();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -42,7 +50,7 @@ const Signup = () => {
     axios(configuration)
       .then((result) => {
         setSignup(true);
-        alert("registered successfully");
+        notify();
         navigate("/login");
       })
       .catch((err) => {
@@ -81,11 +89,17 @@ const Signup = () => {
         <Button
           variant="primary"
           type="submit"
-          onClick={(e) => handleSubmit(e)}
+          onClick={(e) => {
+            handleSubmit(e);
+            handleNotify();
+          }}
           className="mt-2"
         >
           Submit
         </Button>
+        <div className="login-link">
+          <Link to="/login">Login instead</Link>
+        </div>
       </div>
     </div>
   );

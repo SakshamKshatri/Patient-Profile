@@ -62,6 +62,10 @@
   }
 }
 
+.login-link {
+  margin-top: 10px;
+}
+
 /* @media (min-width: 768px) {
   .login-page {
     flex-direction: row;

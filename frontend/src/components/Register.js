@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import "../styles/registrationForm.css";
 import { useNavigate } from "react-router-dom";
+import "../styles/registrationForm.css";
+import Navbar from "./Navbar.js";
 
 const Register = () => {
   const [fullName, setFullname] = useState("");
@@ -55,7 +56,7 @@ const Register = () => {
       .then((result) => {
         setRegister(true);
         alert("registered successfully");
-        navigate("/login");
+        navigate("/");
       })
       .catch((error) => {
         error = new Error();
@@ -64,6 +65,7 @@ const Register = () => {
 
   return (
     <>
+      <Navbar />
       <div className="registration-page">
         <h2>Register</h2>
         <div className="registration-form">
@@ -185,6 +187,7 @@ const Register = () => {
             <Button
               variant="primary"
               type="submit"
+              className="mt-2" 
               onClick={(e) => handleSubmit(e)}
             >
               Submit
